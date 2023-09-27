@@ -2,12 +2,15 @@ export default class ImageSlider {
   #currentPosition = 0;
   #slideNunber = 0;
   #slideWidth = 0;
+  #intervalID;
+  #autoPlay = true;
 
   constructor() {
     this.assignElement();
     this.initSlideNumber();
     this.initSlideWidth();
     this.initSliderListWidth();
+    this.initAutoPlay();
     this.addEvent();
     this.createIndicator();
     this.setIndicator();
@@ -21,6 +24,8 @@ export default class ImageSlider {
     this.$indicatorContainer = this.$sliderContainer.querySelector(
       '.indicator-container',
     );
+    this.$controlWrapper =
+      this.$sliderContainer.querySelector('.control-wrapper');
   }
 
   initSlideNumber() {
@@ -36,6 +41,10 @@ export default class ImageSlider {
     this.$sliderList.style.width = `${this.#slideNunber * this.#slideWidth}px`;
   }
 
+  initAutoPlay() {
+    this.#intervalID = setInterval(this.moveToRight.bind(this), 3000);
+  }
+
   addEvent() {
     this.$nextButton.addEventListener('click', this.moveToRight.bind(this));
     this.$previousButton.addEventListener('click', this.moveToLeft.bind(this));
@@ -43,6 +52,7 @@ export default class ImageSlider {
       'click',
       this.onClickIndicator.bind(this),
     );
+    this.$controlWrapper.addEventListener('click', this.togglePlay.bind(this));
   }
 
   moveToRight() {
@@ -54,6 +64,11 @@ export default class ImageSlider {
     this.$sliderList.style.left = `-${
       this.#slideWidth * this.#currentPosition
     }px`;
+
+    if (this.#autoPlay) {
+      clearInterval(this.#intervalID);
+      this.#intervalID = setInterval(this.moveToRight.bind(this), 3000);
+    }
 
     this.setIndicator();
   }
@@ -67,6 +82,11 @@ export default class ImageSlider {
     this.$sliderList.style.left = `-${
       this.#slideWidth * this.#currentPosition
     }px`;
+
+    if (this.#autoPlay) {
+      clearInterval(this.#intervalID);
+      this.#intervalID = setInterval(this.moveToRight.bind(this), 3000);
+    }
 
     this.setIndicator();
   }
@@ -102,5 +122,19 @@ export default class ImageSlider {
     }
 
     this.setIndicator();
+  }
+
+  togglePlay(event) {
+    if (event.target.dataset.status === 'play') {
+      this.#autoPlay = true;
+      this.$controlWrapper.classList.add('play');
+      this.$controlWrapper.classList.remove('pause');
+    } else {
+      this.#autoPlay = false;
+      this.#autoPlay = true;
+      this.$controlWrapper.classList.add('pause');
+      this.$controlWrapper.classList.remove('add');
+      clearInterval(this.#intervalID);
+    }
   }
 }
