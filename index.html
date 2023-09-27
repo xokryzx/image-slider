@@ -4,6 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Slider</title>
+    <script
+      src="https://kit.fontawesome.com/8d31de2c77.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <div class="slider-container">
+      <ul>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat1.jpg" />
+        </li>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat2.jpg" />
+        </li>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat3.jpg" />
+        </li>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat4.jpg" />
+        </li>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat5.jpg" />
+        </li>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat6.jpg" />
+        </li>
+        <li class="slider-item">
+          <img class="slider-image" src="./cat7.jpg" />
+        </li>
+      </ul>
+      <div class="button next">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="button previous">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <ul class="indicator-container">
+        <li class="indicator active"></li>
+        <li class="indicator"></li>
+        <li class="indicator"></li>
+        <li class="indicator"></li>
+        <li class="indicator"></li>
+        <li class="indicator"></li>
+        <li class="indicator"></li>
+      </ul>
+      <div class="control-wrapper play">
+        <i class="fa fa-pause" data-status="pause"></i>
+        <i class="fa fa-play" data-status="play"></i>
+      </div>
+    </div>
+  </body>
 </html>

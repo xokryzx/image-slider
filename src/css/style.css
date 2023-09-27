@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slider-container {
+  width: 600px;
+  height: 600px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  overflow: hidden;
+}
+
+.slider-image {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.button {
+  width: 50px;
+  height: 60px;
+
+  line-height: 57px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+
+  user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.next {
+  position: absolute;
+  top: 50%;
+  right: -50px;
+  transform: translateY(-50%);
+
+  color: white;
+  border-radius: 7px 0px 0px 7px;
+}
+
+.previous {
+  position: absolute;
+  top: 50%;
+  left: -50px;
+  transform: translateY(-50%);
+
+  color: white;
+  border-radius: 0px 7px 7px 0px;
+}
+
+.slider-container:hover .next {
+  right: 0;
+}
+
+.slider-container:hover .previous {
+  left: 0;
+}
+
+.indicator-container {
+  height: 15px;
+  width: 100%;
+
+  position: absolute;
+  bottom: 20px;
+
+  display: flex;
+  justify-content: center;
+  transition: 0.4s;
+}
+
+.indicator {
+  width: 15px;
+  height: 15px;
+  margin: 0 4px;
+
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.indicator.active {
+  opacity: 1;
+}
+
+.control-wrapper {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  color: white;
+  cursor: pointer;
+}
+
+.play .fa-play {
+  display: none;
+}
+
+.play .fa-pause {
+  display: block;
+}
+
+.pause .fa-play {
+  display: block;
+}
+
+.pause .fa-pause {
+  display: none;
+}
