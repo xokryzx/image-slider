@@ -9,6 +9,8 @@ export default class ImageSlider {
     this.initSlideWidth();
     this.initSliderListWidth();
     this.addEvent();
+    this.createIndicator();
+    this.setIndicator();
   }
 
   assignElement() {
@@ -16,6 +18,9 @@ export default class ImageSlider {
     this.$sliderList = this.$sliderContainer.querySelector('.slider-list');
     this.$nextButton = this.$sliderContainer.querySelector('.next');
     this.$previousButton = this.$sliderContainer.querySelector('.previous');
+    this.$indicatorContainer = this.$sliderContainer.querySelector(
+      '.indicator-container',
+    );
   }
 
   initSlideNumber() {
@@ -34,6 +39,10 @@ export default class ImageSlider {
   addEvent() {
     this.$nextButton.addEventListener('click', this.moveToRight.bind(this));
     this.$previousButton.addEventListener('click', this.moveToLeft.bind(this));
+    this.$indicatorContainer.addEventListener(
+      'click',
+      this.onClickIndicator.bind(this),
+    );
   }
 
   moveToRight() {
@@ -45,6 +54,8 @@ export default class ImageSlider {
     this.$sliderList.style.left = `-${
       this.#slideWidth * this.#currentPosition
     }px`;
+
+    this.setIndicator();
   }
 
   moveToLeft() {
@@ -56,5 +67,40 @@ export default class ImageSlider {
     this.$sliderList.style.left = `-${
       this.#slideWidth * this.#currentPosition
     }px`;
+
+    this.setIndicator();
+  }
+
+  createIndicator() {
+    const docFragment = document.createDocumentFragment();
+    for (let i = 0; i < this.#slideNunber; i++) {
+      const li = document.createElement('li');
+      li.classList.add('indicator');
+      li.dataset.index = i;
+      docFragment.appendChild(li);
+    }
+    this.$indicatorContainer.appendChild(docFragment);
+  }
+
+  setIndicator() {
+    this.$indicatorContainer
+      .querySelector('.active')
+      ?.classList.remove('active');
+
+    this.$indicatorContainer
+      .querySelector(`.indicator:nth-child(${this.#currentPosition + 1})`)
+      .classList.add('active');
+  }
+
+  onClickIndicator(event) {
+    const indexPosition = parseInt(event.target.dataset.index);
+    if (Number.isInteger(indexPosition)) {
+      this.#currentPosition = indexPosition;
+      this.$sliderList.style.left = `-${
+        this.#slideWidth * this.#currentPosition
+      }px`;
+    }
+
+    this.setIndicator();
   }
 }
