@@ -16,6 +16,16 @@
   overflow: hidden;
 }
 
+.slider-list {
+  position: relative;
+  left: 0;
+  transition: 0.4s;
+}
+
+.slider-item {
+  float: left;
+}
+
 .slider-image {
   width: 600px;
   height: 600px;
